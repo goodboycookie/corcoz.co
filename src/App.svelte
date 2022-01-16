@@ -19,9 +19,6 @@
 
 
 	<div class="HomeWrapper">
-		<div class = "topbar">
-      <Titlebar />
-		</div>
 		
 		
 		<div class ="MainSection">

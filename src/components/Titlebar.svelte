@@ -82,7 +82,7 @@
     text-align: center;
     font-family: Fredoka One;
     font-size: 12px;
-    color: white;
+    color: black;
     font-weight: 500;
   }
 }

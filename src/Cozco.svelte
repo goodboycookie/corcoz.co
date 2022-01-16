@@ -7,6 +7,7 @@ import Teevee from './Teevee.svelte';
 import Foco from './Foco.svelte';
 import Soundbubble from './cozco/Soundbubble.svelte';
 import App from './App.svelte';
+import Titlebar from './components/Titlebar.svelte';
 
 
     const chosenColor = "#ffffff";
@@ -40,7 +41,7 @@ import App from './App.svelte';
             title: 'changelog',
             activate: true,
             component: Changelog,
-            pos: {x: 100, y: 320, wdth: '180px'},
+            pos: {x: 50, y: 100, wdth: '180px'},
             function: receiveMessage,
         },
         {
@@ -49,7 +50,7 @@ import App from './App.svelte';
             title: 'ceevee',
             activate: true,
             component: Ceevee,
-            pos: {x:250, y: 100, wdth: '100px'},
+            pos: {x:-150, y: 100, wdth: '100px'},
             function: receiveMessage,
         },
         {
@@ -58,7 +59,7 @@ import App from './App.svelte';
             title: 'typu',
             activate: false,
             component: 'na',
-            pos: {x: 40, y: 60, wdth: '150px'},
+            pos: {x: -300, y: -160, wdth: '150px'},
             function: playAudio,
         },
         {
@@ -77,7 +78,7 @@ import App from './App.svelte';
             title: 'foco',
             activate: true,
             component: Foco,
-            pos: {x: 390, y: 100, wdth: '250px'},
+            pos: {x: 20, y: -200, wdth: '250px'},
             function: receiveMessage,
         },
     ]
@@ -142,6 +143,7 @@ import App from './App.svelte';
         <div on:click={()=>{manualPush('left')}} class="mobile button left"><div>l</div></div>
         <div on:click={()=>{manualPush('down')}} class="mobile button down"><div>d</div></div>
         <div on:click={()=>{manualPush('up')}} class="mobile button up"><div>u</div></div>
+        <div class={movable ? "translated-div" : "untranslated-div"}>
         {#each bubbleData as bubble}
             <Bubble pX={pX + bubble.pos.x + 'px'} 
                     activatable={bubble.activate}
@@ -156,9 +158,11 @@ import App from './App.svelte';
                     <svelte:component this={bubble.component} />
             </Bubble>
         {/each}
-
-        <div style="top:{pY+50}px; left:{pX-350}px; text-align: right" class="floater-text">you are the nth visitor!</div>
-    </div>
+        <div style="top:{pY-300}px; left:{pX}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div>
+        <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
+            <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></div>
+            </div>
+        </div>
 
 </main>
 
@@ -166,10 +170,24 @@ import App from './App.svelte';
     .content-box{
         height: 100%;
         width: 100%;
-        margin: 0;
+        
+
         position: absolute;
         overflow: hidden;
         cursor: grab;
+
+        .translated-div{
+            height: 100%;
+            width: 100%;
+            transform: translate(50%, 50%);
+            transition: 0.4s;
+        }
+        .untranslated-div{
+            height: 100%;
+            width: 100%;
+            transform: translate(0%, 0%);
+            transition: 0.4s;
+        }
 
 
         .floater-text{
@@ -177,9 +195,13 @@ import App from './App.svelte';
             width: 200px;
             height: 200px;
             color: blue;
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             position: absolute;
             transition: 0.3s;
+            transform: translate(-50%, -50%);
         }
         .mobile{
             opacity: 0;
@@ -207,16 +229,16 @@ import App from './App.svelte';
         right: 10px;
         top: 50%;
         width: 3em;
-        height: 5em;
+        height: 3em;
         }
         .left{
         left: 10px;
         top: 50%;
         width: 3em;
-        height: 5em;
+        height: 3em;
         } .down{
         bottom: 10px;
-        width: 5em;
+        width: 3em;
         height: 3em;
         transform: translate(-50%, 0);
         left: 50%;
@@ -224,7 +246,7 @@ import App from './App.svelte';
         top: 10px;
         transform: translate(-50%, 0);
         left: 50%;
-        width: 5em;
+        width: 3em;
         height: 3em;
         }
         
