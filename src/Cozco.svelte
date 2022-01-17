@@ -68,7 +68,7 @@ import Titlebar from './components/Titlebar.svelte';
             title: 'teevee',
             activate: true,
             component: Teevee,
-            pos: {x: 450, y: 400, wdth: '100px'},
+            pos: {x: -80, y: 0, wdth: '100px'},
             function: receiveMessage,
             param: 'desktop',
         },
