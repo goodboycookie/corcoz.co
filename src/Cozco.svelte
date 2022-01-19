@@ -54,15 +54,6 @@ import Titlebar from './components/Titlebar.svelte';
             function: receiveMessage,
         },
         {
-            key: 2,
-            color: ['pink'],
-            title: 'typu',
-            activate: false,
-            component: 'na',
-            pos: {x: -300, y: -160, wdth: '150px'},
-            function: playAudio,
-        },
-        {
             key: 1,
             color: ['#6d326d', 'snow'],
             title: 'teevee',

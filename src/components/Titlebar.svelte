@@ -81,8 +81,8 @@
     float: left;
     text-align: center;
     font-family: Fredoka One;
-    font-size: 12px;
-    color: black;
+    font-size: 14px;
+    color: snow;
     font-weight: 500;
   }
 }
