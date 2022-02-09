@@ -41,8 +41,8 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: [sveltePreprocess({ sourceMap: !production }), autoProcess()],
-			compilerOptions: {
+			preprocess: [sveltePreprocess({ sourceMap: !production, postcss:{plugins: [require('tailwindcss')(), require('autoprefixer')()],}, }), autoProcess()],
+			compilerOptions: { 
 				// enable run-time checks when not in production
 				dev: !production
 			}

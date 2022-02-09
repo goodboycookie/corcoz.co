@@ -1,27 +1,80 @@
 <script lang="ts">
 import { bubble } from 'svelte/internal';
 import Bubble from './Bubble.svelte';
-import Changelog from './cozco/Changelog.svelte';
+import Changelog from './components/Changelog.svelte';
 import Ceevee from './Ceevee.svelte'
 import Teevee from './Teevee.svelte';
 import Foco from './Foco.svelte';
 import Soundbubble from './cozco/Soundbubble.svelte';
 import App from './App.svelte';
-import Titlebar from './components/Titlebar.svelte';
+import Titlebar from './cozco/Titlebar.svelte';
+import { linkWithCredential } from 'firebase/auth';
+
+
+const bigblock = () => {
+    window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
+}
+const receiveMessage = (event) =>{
+    if(event.detail.type === 'screen'){
+        movable = false;
+    }
+    else if(event.detail.type === 'button'){
+        movable = true;
+    }
+}
+    
+export const bubbleData = [
+    {
+        key: 0,
+        color: ['green'],
+        title: '♻️🪵',
+        activate: true,
+        component: Changelog,
+        pos: {x: 80, y: 80, wdth: '180px'},
+        function: receiveMessage,
+    },
+    {
+        key: 1,
+        color: ['#fffff0', '#f0f0f0'],
+        title: '📝',
+        activate: true,
+        component: Ceevee,
+        pos: {x:-200, y: 100, wdth: '100px'},
+        function: receiveMessage,
+    },
+    {
+        key: 2,
+        color: ['#6d326d', 'snow'],
+        title: '📺',
+        activate: true,
+        component: Teevee,
+        pos: {x: -80, y: 0, wdth: '160px'},
+        function: receiveMessage,
+        param: 'desktop',
+    },
+    {
+        key: 3,
+        color: ['#61dafb', 'white'],
+        title: '🖼️',
+        activate: true,
+        component: Foco,
+        pos: {x: 45, y: -200, wdth: '250px'},
+        function: receiveMessage,
+    },
+    {
+        key: 4,
+        color: ['#6d326d', 'white'],
+        title: '👔🧸',
+        activate: false,
+        pos: {x: -110, y: -50, wdth: '60px'},
+        function: bigblock,
+    },
+]
 
 
     const chosenColor = "#ffffff";
+    
 
-    const receiveMessage = (event) =>{
-        if(event.detail.type === 'screen'){
-            console.log('no');
-            movable = false;
-        }
-        else if(event.detail.type === 'button'){
-            console.log('si');
-            movable = true;
-        }
-    }
 
     let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
             "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
@@ -34,45 +87,7 @@ import Titlebar from './components/Titlebar.svelte';
         playCount++;
     }
 
-    export const bubbleData = [
-        {
-            key: 0,
-            color: ['green'],
-            title: 'changelog',
-            activate: true,
-            component: Changelog,
-            pos: {x: 50, y: 100, wdth: '180px'},
-            function: receiveMessage,
-        },
-        {
-            key: 1,
-            color: ['#fffff0', '#f0f0f0'],
-            title: 'ceevee',
-            activate: true,
-            component: Ceevee,
-            pos: {x:-150, y: 100, wdth: '100px'},
-            function: receiveMessage,
-        },
-        {
-            key: 1,
-            color: ['#6d326d', 'snow'],
-            title: 'teevee',
-            activate: true,
-            component: Teevee,
-            pos: {x: -80, y: 0, wdth: '100px'},
-            function: receiveMessage,
-            param: 'desktop',
-        },
-        {
-            key: 1,
-            color: ['#61dafb', 'white'],
-            title: 'foco',
-            activate: true,
-            component: Foco,
-            pos: {x: 20, y: -200, wdth: '250px'},
-            function: receiveMessage,
-        },
-    ]
+
 
 
     let m = { x: 0, y: 0 };
@@ -89,7 +104,11 @@ import Titlebar from './components/Titlebar.svelte';
 		startpX = pX;
 	 	clicked = true;
 	}
-	
+    function clickUp() {
+        clicked = false;
+		m.x = 0;
+		m.y = 0;
+	}
 	function handleMousemove(event) {
 		if(clicked && movable){
             pY = startpY + event.clientY - m.y;
@@ -117,11 +136,7 @@ import Titlebar from './components/Titlebar.svelte';
         }
     }
 
-	function clickUp() {
-        clicked = false;
-		m.x = 0;
-		m.y = 0;
-	}
+
     
 
 
@@ -130,28 +145,30 @@ import Titlebar from './components/Titlebar.svelte';
 <main>
     
     <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
-        <div on:click={()=>{manualPush('right')}} class="mobile button right"><div>r</div></div>
-        <div on:click={()=>{manualPush('left')}} class="mobile button left"><div>l</div></div>
-        <div on:click={()=>{manualPush('down')}} class="mobile button down"><div>d</div></div>
-        <div on:click={()=>{manualPush('up')}} class="mobile button up"><div>u</div></div>
+        <div style="top:{pY-300}px; left:{pX}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+        <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
+        <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
+        <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
+        <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>u</div></div>
         <div class={movable ? "translated-div" : "untranslated-div"}>
-        {#each bubbleData as bubble}
-            <Bubble pX={pX + bubble.pos.x + 'px'} 
-                    activatable={bubble.activate}
-                    pY={pY + bubble.pos.y + 'px'} 
-                    title={bubble.title} 
-                    height={bubble.pos.wdth}
-                    on:message={bubble.function}
-                    textcolor={bubble.color[1]}
-                    bg={bubble.color[0]}
-                    specialParam={bubble.param}>
-                    
-                    <svelte:component this={bubble.component} />
-            </Bubble>
-        {/each}
-        <div style="top:{pY-300}px; left:{pX}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div>
-        <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
-            <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></div>
+            {#each bubbleData as bubble}
+                <Bubble pX={pX + bubble.pos.x + 'px'} 
+                        activatable={bubble.activate}
+                        pY={pY + bubble.pos.y + 'px'} 
+                        title={bubble.title} 
+                        height={bubble.pos.wdth}
+                        on:message={bubble.function}
+                        textcolor={bubble.color[1]}
+                        bg={bubble.color[0]}
+                        specialParam={bubble.param}>
+                        
+                        <svelte:component this={bubble.component} />
+                </Bubble>
+            {/each}
+            
+            <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
+                <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
+            </div>
             </div>
         </div>
 
@@ -204,7 +221,7 @@ import Titlebar from './components/Titlebar.svelte';
             
             position: absolute;
             border: 1px solid black;
-            z-index: 4;
+            z-index: 1;
             div{
                 position: absolute;
                 display: inline-block;
@@ -215,6 +232,9 @@ import Titlebar from './components/Titlebar.svelte';
                
             }
             
+        }
+        .button-gone{
+            display: none;
         }
         .right{
         right: 10px;

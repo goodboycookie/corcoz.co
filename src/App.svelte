@@ -3,7 +3,7 @@
   import Ceevee from './Ceevee.svelte';
   import Teevee from './Teevee.svelte';
   import Foco from './Foco.svelte';
-  import Titlebar from './components/Titlebar.svelte';
+  import Titlebar from './cozco/Titlebar.svelte';
 
   const options = [
     {key: 0, title: 'cozco', component: Cozco},
@@ -43,7 +43,6 @@
 @font-face{
   font-family: 'VCR OSD Mono';
   src: local('VCR OSD Mono'), url(./fonts/VCR_OSD_MONO_1.001.ttf);
-
 }
 
 
@@ -56,7 +55,7 @@
   top: 0;
   left: 0;
   flex-direction: column;
-  background-color: #61dafb;
+  background-color: black;
   cursor: none;
 
   -webkit-user-select: none; /* Safari */        

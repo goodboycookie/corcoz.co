@@ -1,54 +1,56 @@
 <!DOCTYPE html>
+<head>
 
+    <title>jesse a. cortez</title>
+</head>
 <body>
-    <h3>jesse a cortez</h3>
+    <h2 class="title" style="text-align: center;"> jesse a cortez</h2>
 
     <div class="row">
-        <div class="column">
+        <div class="left column">
             <h3>movie</h3>
-            <div class=' fd'>
-                <u>memorable shorts i've worked on</u>
+            <div>
                 <ul>
                     <li>
-                        one day only! - actor - filmed 2021
+                        <b>one day only!</b> - actor - filmed 2021
                     </li>
                     <li>
-                        rad lads burgers n fries - writer,director - filmed 2021
+                        <b>rad lads burgers n fries</b> - director - filmed 2021
                     </li>
                     <li>
-                        h0w to love - gaffer - filmed 2020, <a href="https://watch.weareo.tv/howtol0ve">released 2021</a>
+                        <b>h0w to love</b> - gaffer - filmed 2020 - <a href="https://watch.weareo.tv/howtol0ve">released 2021</a>
                     </li>
                     <li>
-                        the exorcism of louanne camby - dp - filmed 2020
+                        <b>the exorcism of louanne camby</b> - dp - filmed 2020
                     </li>
                     <li>
-                        my soul is a cage on the outside of my body - dp - filmed 2019
+                        <b>my soul is a cage on the outside of my body</b> - dp - filmed 2019
                     </li>
                     <li>
-                        bravas - producer - filmed 2019
+                        <b>bravas</b> - producer - filmed 2019
                     </li>
                     
                 </ul>
-                <u>i've worked on more but these are the ones i remember most right now</u>
+                <u>i've worked on more; these are my biggest, most recent roles :)</u>
             </div>
         </div>
-        <div class="column">
+        <div class="right column">
             <h3>code</h3>
-            <div class=' fd'>
-                <ul>
-                    <li>
-                        <a href="https://corcoz.co/">corcozco</a> - silly lil blog - 2021
-                    </li>
-                    <li>
-                        <a href="https://uglyboispoloclub.com/">ugly boys polo club</a> - freelanced website - 2020
-                    </li>
-                    <li>
-                        <a href="https://corcozco.itch.io/big-blocks-office">big block's office</a> - webgame - 2020
-                        <span class="subtitle">featured on chicago's video game arts gallery website :^)</span>
-                    </li>
-                    
-                </ul>
+            <div>
+                <li>
+                    <a href="https://corcoz.co/">corcozco</a> - silly lil blog - 2021
+                </li>
+                <li>
+                    <a href="https://uglyboispoloclub.com/">ugly boys polo club</a> - freelanced website - 2020
+                </li>
+                <li>
+                    <a href="https://corcozco.itch.io/big-blocks-office">big block's office</a> - webgame - 2020
+                    <span class="subtitle">ft. on chicago's video game arts gallery website</span>
+                </li>
             </div>
+            <h3>education</h3>
+            <div>northwestern univ. - b.s. communications (radio/tv/film) <span style="font-size: 14px;">+ c.s. + media arts & game design</span></div>
+            <div>jun. 2021</div>
         </div>
     </div>  
 </body>
@@ -57,25 +59,71 @@
 
 
 <style>
+    @media only screen and (max-width: 600px) {
+        .column {
+            width: 100vw;
+            padding: 10px;
+
+        }
+        .row{
+            display: flex;
+            flex-direction: column;
+            border:none;
+        }
+    }
+
+
+    a:visited{
+    color:blue;
+    }
     body{
         background-color: beige;
-        width: 100%;
+        padding-top: 10%;
         
     }
     .row{
         display: flex;
+        justify-content: center;
     }
-    .column {
-    flex: 50%;
+    .column{
+        width: 40vw;
+
     }
-    .fd{
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
+    .left{
+        text-align: right;
+        border-right: 1px solid black;
+        padding-right: 10px;
+    }
+    .right{
+        text-align: left;
+        padding-left: 10px;
+    }
+    .title{
+        text-align:center;
+        /* font-family: monospace; */
+        font-variant-numeric: tabular-nums lining-nums;
+    }
+    .title:hover{
+        cursor:none;
+    }
+    .title:hover:after{
+        content: "  ––––––––––– (310) 617 - 2939";
+        font-size: 20px;
+    }
+    .title:hover:before{
+        content: "jesseacortez5@gmail.com –––";
+        font-size: 20px;
     }
     li{
         margin: 5px 0;
+        list-style: none;
     }
 </style>
+
+<script>
+
+
+
+</script>
 
 </html>

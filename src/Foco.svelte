@@ -6,6 +6,7 @@
     let desktop02 = './assets/images/0/2.jpg';
     let desktop03 = './assets/images/0/3.jpg';
     let desktop04 = './assets/images/0/4.jpg';
+    import ImgFolder from './components/ImgFolder.svelte';
 
     let contentData = [
         {
@@ -15,6 +16,7 @@
             desc: 'lets explore',
             imgs: [desktop00, desktop01, desktop02, desktop03, desktop04],
         },
+
     ]
     let imglist = [];
     let currentimg;
@@ -62,20 +64,22 @@
 
 </script>
 <main class="content-box">
-    <div class="image-box">
-        {#if currentimg} <img alt="image" height="100%" width="100%" src={currentimg} />{/if}
-    </div>
+    
+    {#if currentimg} <div class="image-box"><img alt="image" height="100%" width="100%" src={currentimg} /></div>{/if}
     
     <div class="folder-wrapper">
-        <div on:click={leftClick}  id="left" class="arrow {leftavail ? '' : ' inaccessible'}">{leftavail ? left : "xxx"}</div>
-        <div class="folders">
-            {#each contentData as folder}
-                <div on:click={()=>swapPics(folder.imgs)} class="folder-title">
-                    {folder.title}
-                </div>
-            {/each}
-        </div>
+        <div class="row">
+            <div on:click={leftClick}  id="left" class="arrow {leftavail ? '' : ' inaccessible'}">{leftavail ? left : "xxx"}</div>
+            <div class="folders">
+                {#each contentData as folder}
+                    <div on:click={()=>swapPics(folder.imgs)} class="folder-title">
+                        {folder.title}
+                    </div>
+                {/each}
+            </div>
+        
         <div on:click={rightClick}  id="right" class="arrow {rightavail ? '' : ' inaccessible'}">{rightavail ? '-->' : "xxx"}</div>
+        </div>
     </div>
 </main>
 <style type="text/scss">
@@ -94,7 +98,7 @@
         justify-content: center;
         align-items: center;
         .image-box{
-            border: 10px solid snow;
+            border: 5px solid snow;
             min-width: 200px;
             min-height: 300px;
             max-width: 450px;
@@ -111,7 +115,8 @@
 
         }
         ::-webkit-scrollbar {
-        width: 16px;
+        width: 8px;
+        height: 0px;
         }
 
         /* Track */
@@ -134,10 +139,21 @@
         bottom: 15px;
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
-        width: 70%;
-        height: 15%;
+        width: 100%;
+        height: 40%;
+
+        .row{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border: 1px solid white;
+            height: 20%;
+            margin: 20px;
+        }
+
         .arrow{
             font-family: Roboto Mono;
             font-size: 24px;
@@ -153,24 +169,23 @@
         }
         #right{
                 cursor: e-resize;
+                border-left:1px solid white;
             }
             #left{
                 cursor: w-resize;
+                border-right:1px solid white;
             }
         .folders{
-            border: 10px solid snow;
+            
             width: auto;
-            padding-right: 15px;
-            margin: 10px 0;
-            max-width: 60%;
-            max-height: 100%;
+            padding-right: 5px;
+            height: 100%;
             overflow: scroll;
     }
 
     .folder-title {
         font-family: Roboto Mono;
         color: snow;
-        font-size: 2em;
     }
     .folder-title:hover{
         color: #ffb941;

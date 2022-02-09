@@ -90,6 +90,7 @@ import { createEventDispatcher } from "svelte";
             z-index: 15;
             cursor: default;
             border-radius: 25px;
+            overflow: scroll;
             .bubble-contents{
                 opacity: 1;
                 animation-name: enter;
@@ -131,8 +132,9 @@ import { createEventDispatcher } from "svelte";
                 display: flex; 
                 justify-content: center; 
                 align-items: center;
-                font-size: 1.5rem;
+                font-size: 1.5em;
                 font-weight: 400;
+                overflow:hidden;
                 font-family: Fredoka One;
                 transition: 0.2s;
             }
