@@ -4,25 +4,25 @@ const changelogData = [
         {
             id: 0,
             date: "5 aug 18",
-            altdate: 'on the back porch',
+            altdate: 'the day i kicked it with nelly and rory in the back porch before an awesome party',
             message: "i buy the corcoz.co domain",
         },
         {
             id: 1,
             date: "18 sept 21",
-            altdate: '',
+            altdate: "18 sept 21",
             message: "i finally decide to do something with the domain; i find out its been expired and purchased by someone else. i hit them up and they try to sell it back to me for 3x the original price. ",
         },
         {
             id: 2,
             date: "20 sept 21",
-            altdate: '',
+            altdate: "20 sept 21",
             message: "corcozco goes live under a new domain name!",
         },
         {
             id: 3,
             date: "25 sept 21",
-            altdate: '',
+            altdate: "25 sept 21",
             message: "table the triple buttons idea (you'll see) for now. cleaned up the design and added foco and teevee",
         },
         {
@@ -40,13 +40,13 @@ const changelogData = [
         {
             id: 6,
             date: "18 jan 22",
-            altdate: '',
+            altdate:  "18 jan 22",
             message: "ceevee different",
         },
         {
             id: 7,
             date: "19 jan 22",
-            altdate: '',
+            altdate: "19 jan 22",
             message: "changed layout of stuff. made git push in a long time",
         },
         {
@@ -57,26 +57,23 @@ const changelogData = [
         },
         {
             id: 9,
-            date: "22 jan 22",
-            altdate: 'the day i had to go and pay a parking ticket',
-            message: "someone who i thought was gonna be famous died",
-        }
+            date: "23 april 22",
+            altdate: "the day i defribilated my pc",
+            message: "i remembered this site existed and made minor changes",
+        },
     ]
 
     const enter = (num) =>{
-        const alt = changelogData[num].altdate;
-        const date = changelogData[num].date;
-        changelogData[num].date = altdate;
-        changelogData[num].altdate = date;
+        changelogData[Math.abs(num)].id = num * -1;
     }
     
 </script>
 
 <main>
-    {#each changelogData as data}
+    {#each changelogData as data} 
         <div class="changelog-data">
-            <div id="date">{data.date}</div>
-            <div id="message">{data.message}</div>
+            <div on:mouseenter={enter(data.id)} on:mouseleave={enter(data.id)} id="date">{data.id >= 0 ? data.date : data.altdate}</div>
+            <div  id="message">{data.message}</div>
         </div>
     {/each}
 
@@ -106,7 +103,7 @@ const changelogData = [
             text-shadow: 0 0 0 black;
         }
         div:hover{
-            color: green;
+            color: #dddddd;
         }
 
     }

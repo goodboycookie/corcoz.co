@@ -132,11 +132,14 @@ import { createEventDispatcher } from "svelte";
                 display: flex; 
                 justify-content: center; 
                 align-items: center;
-                font-size: 1.5em;
+                // font-size: 1.3em;
+                // border: 1px solid fuchsia;
                 font-weight: 400;
                 overflow:hidden;
                 font-family: Fredoka One;
                 transition: 0.2s;
+                font-size: 1.5vw;
+                
             }
             
             

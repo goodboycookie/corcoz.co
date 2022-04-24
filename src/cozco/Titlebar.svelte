@@ -83,7 +83,8 @@
     font-family: Fredoka One;
     font-size: 14px;
     color: snow;
-    font-weight: 500;
+    -webkit-text-stroke: 1px snow;
+    font-weight: 100;
   }
 }
 </style>

@@ -66,7 +66,7 @@ export const bubbleData = [
         color: ['#6d326d', 'white'],
         title: '👔🧸',
         activate: false,
-        pos: {x: -110, y: -50, wdth: '60px'},
+        pos: {x: -110, y: -50, wdth: '80px'},
         function: bigblock,
     },
 ]
@@ -145,7 +145,7 @@ export const bubbleData = [
 <main>
     
     <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
-        <div style="top:{pY-300}px; left:{pX}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+        <div style="top:{pY+150}px; left:{pX+100}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
         <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
         <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
         <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
@@ -166,9 +166,9 @@ export const bubbleData = [
                 </Bubble>
             {/each}
             
-            <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
+            <!-- <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
                 <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
-            </div>
+            </div> -->
             </div>
         </div>
 
