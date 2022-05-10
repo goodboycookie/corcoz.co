@@ -90,12 +90,13 @@ import { createEventDispatcher } from "svelte";
             z-index: 15;
             cursor: default;
             border-radius: 25px;
-            overflow: scroll;
+            overflow: auto;
             .bubble-contents{
                 opacity: 1;
                 animation-name: enter;
                 animation-delay: 0;
                 animation-duration: 1.2s;
+                overflow: auto;
                 
                 .x-button{ 
                     height: 50px;

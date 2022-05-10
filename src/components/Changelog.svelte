@@ -61,6 +61,12 @@ const changelogData = [
             altdate: "the day i defribilated my pc",
             message: "i remembered this site existed and made minor changes",
         },
+        {
+            id: 10,
+            date: "9 may 22",
+            altdate: "the day some guy caught me in my car sucking chocolate out of a melted lindor truffle",
+            message: "i fixed foco a lil and added sum new snaps",
+        },
     ]
 
     const enter = (num) =>{
@@ -70,7 +76,7 @@ const changelogData = [
 </script>
 
 <main>
-    {#each changelogData as data} 
+    {#each [...changelogData].reverse() as data} 
         <div class="changelog-data">
             <div on:mouseenter={enter(data.id)} on:mouseleave={enter(data.id)} id="date">{data.id >= 0 ? data.date : data.altdate}</div>
             <div  id="message">{data.message}</div>
@@ -103,15 +109,12 @@ const changelogData = [
             text-shadow: 0 0 0 black;
         }
         div:hover{
-            color: #dddddd;
+            color: yellow;
         }
 
     }
 
     @media screen and (max-width: 900px){
-        main{
-            overflow: scroll;
-        }
         .changelog-data{
             margin-top: 20px;
             flex-direction: column;

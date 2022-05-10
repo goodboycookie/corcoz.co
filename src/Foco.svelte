@@ -6,20 +6,38 @@
     let desktop02 = './assets/images/0/2.jpg';
     let desktop03 = './assets/images/0/3.jpg';
     let desktop04 = './assets/images/0/4.jpg';
+    let desktop10 = './assets/images/1/0.jpg';
+    let desktop11 = './assets/images/1/1.jpg';
+    let desktop12 = './assets/images/1/2.jpg';
+    let desktop13 = './assets/images/1/3.jpg';
+    let desktop14 = './assets/images/1/4.jpg';
+    let desktop15 = './assets/images/1/5.jpg';
+    let desktop16 = './assets/images/1/6.jpg';
+    let desktop17 = './assets/images/1/7.jpg';
+    let desktop18 = './assets/images/1/8.jpg';
+
     import ImgFolder from './components/ImgFolder.svelte';
 
     let contentData = [
         {
             index: 0,
-            title: 'desktopphotoset00',
+            title: 'cutting floor flashbacks',
             id: 'yahoo',
-            desc: 'lets explore',
+            desc: 'a couple cutting-floor flashbacks to 2019 or 20.. i cant remember. shot on broken olympus slr lol',
             imgs: [desktop00, desktop01, desktop02, desktop03, desktop04],
+        },
+        {
+            index: 1,
+            title: 'greencam cold cuts',
+            id: 'kodakgreencam',
+            desc: 'some select cold cuts from the clutches of a dead cam! proudly shot on a kodak eashyshare.',
+            imgs: [desktop10, desktop11, desktop12, desktop13, desktop14, desktop15, desktop16, desktop17, desktop18],
         },
 
     ]
     let imglist = [];
     let currentimg;
+    let folderdesc = "choose something already!";
     let imgindex = 0;
     let left = "<--"
     let leftavail = false;
@@ -40,9 +58,10 @@
         }
     }
 
-    function swapPics(imgs) {
-        imglist = imgs;
+    function swapPics(folder) {
+        imglist = folder.imgs;
         imgindex=0;
+        folderdesc = folder.desc;
         currentimg = imglist[imgindex];
         checkArrows();
         
@@ -72,7 +91,7 @@
             <div on:click={leftClick}  id="left" class="arrow {leftavail ? '' : ' inaccessible'}">{leftavail ? left : "xxx"}</div>
             <div class="folders">
                 {#each contentData as folder}
-                    <div on:click={()=>swapPics(folder.imgs)} class="folder-title">
+                    <div on:click={()=>swapPics(folder)} class="folder-title">
                         {folder.title}
                     </div>
                 {/each}
@@ -80,7 +99,11 @@
         
         <div on:click={rightClick}  id="right" class="arrow {rightavail ? '' : ' inaccessible'}">{rightavail ? '-->' : "xxx"}</div>
         </div>
+        <p class="folder-desc">
+            {folderdesc}
+        </p>
     </div>
+    
 </main>
 <style type="text/scss">
     .content-box{
@@ -99,10 +122,10 @@
         align-items: center;
         .image-box{
             border: 5px solid snow;
-            min-width: 200px;
-            min-height: 300px;
-            max-width: 450px;
-            max-height: 450px;
+            // min-width: 200px;
+            // min-height: 300px;
+            max-width: 65vw;
+            max-height: 65vh;
             
             display: flex;
             justify-content: center;
@@ -135,23 +158,31 @@
         }
     }
     .folder-wrapper{
+
         position: absolute;
-        bottom: 15px;
+        bottom: 0;
         display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         width: 100%;
-        height: 40%;
 
+        .folder-desc{
+            color: #61dafb;
+            text-align: center;
+        }
+        .folder-desc:hover{
+            color: snow;
+        }
         .row{
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: flex-start;
             border: 1px solid white;
-            height: 20%;
-            margin: 20px;
+            border-radius: 5px;
+            height: 35px;
+            padding: 3px;
         }
 
         .arrow{
@@ -167,25 +198,32 @@
         .inaccessible:hover{
             color: red;
         }
-        #right{
-                cursor: e-resize;
+            #right{
+
                 border-left:1px solid white;
             }
             #left{
-                cursor: w-resize;
+
                 border-right:1px solid white;
             }
         .folders{
             
             width: auto;
-            padding-right: 5px;
-            height: 100%;
+            // padding-right: 5px;
+            // height: 100%;
             overflow: scroll;
+            height: 100%;
     }
 
     .folder-title {
         font-family: Roboto Mono;
         color: snow;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0 2px;
     }
     .folder-title:hover{
         color: #ffb941;
