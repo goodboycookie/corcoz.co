@@ -1,20 +1,20 @@
 <script lang="ts">
 // import App from "./App.svelte";
     let focogrid = './assets/focogrid.svg';
-    let desktop00 = '/assets/images/0/0.jpg';
-    let desktop01 = '/assets/images/0/1.jpg';
-    let desktop02 = '/assets/images/0/2.jpg';
-    let desktop03 = '/assets/images/0/3.jpg';
-    let desktop04 = '/assets/images/0/4.jpg';
-    let desktop10 = '/assets/images/1/0.jpg';
-    let desktop11 = '/assets/images/1/1.jpg';
-    let desktop12 = '/assets/images/1/2.jpg';
-    let desktop13 = '/assets/images/1/3.jpg';
-    let desktop14 = '/assets/images/1/4.jpg';
-    let desktop15 = '/assets/images/1/5.jpg';
-    let desktop16 = '/assets/images/1/6.jpg';
-    let desktop17 = '/assets/images/1/7.jpg';
-    let desktop18 = '/assets/images/1/8.jpg';
+    let desktop00 = './assets/images/0/0.JPG';
+    let desktop01 = './assets/images/0/1.JPG';
+    let desktop02 = './assets/images/0/2.JPG';
+    let desktop03 = './assets/images/0/3.JPG';
+    let desktop04 = './assets/images/0/4.JPG';
+    let desktop10 = './assets/images/1/0.JPG';
+    let desktop11 = './assets/images/1/1.JPG';
+    let desktop12 = './assets/images/1/2.JPG';
+    let desktop13 = './assets/images/1/3.JPG';
+    let desktop14 = './assets/images/1/4.JPG';
+    let desktop15 = './assets/images/1/5.JPG';
+    let desktop16 = './assets/images/1/6.JPG';
+    let desktop17 = './assets/images/1/7.JPG';
+    let desktop18 = './assets/images/1/8.JPG';
 
     import ImgFolder from './components/ImgFolder.svelte';
 
