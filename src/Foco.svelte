@@ -1,20 +1,20 @@
 <script lang="ts">
 // import App from "./App.svelte";
     let focogrid = './assets/focogrid.svg';
-    let desktop00 = './assets/images/0/0.jpg';
-    let desktop01 = './assets/images/0/1.jpg';
-    let desktop02 = './assets/images/0/2.jpg';
-    let desktop03 = './assets/images/0/3.jpg';
-    let desktop04 = './assets/images/0/4.jpg';
-    let desktop10 = './assets/images/1/0.jpg';
-    let desktop11 = './assets/images/1/1.jpg';
-    let desktop12 = './assets/images/1/2.jpg';
-    let desktop13 = './assets/images/1/3.jpg';
-    let desktop14 = './assets/images/1/4.jpg';
-    let desktop15 = './assets/images/1/5.jpg';
-    let desktop16 = './assets/images/1/6.jpg';
-    let desktop17 = './assets/images/1/7.jpg';
-    let desktop18 = './assets/images/1/8.jpg';
+    let desktop00 = '/assets/images/0/0.jpg';
+    let desktop01 = '/assets/images/0/1.jpg';
+    let desktop02 = '/assets/images/0/2.jpg';
+    let desktop03 = '/assets/images/0/3.jpg';
+    let desktop04 = '/assets/images/0/4.jpg';
+    let desktop10 = '/assets/images/1/0.jpg';
+    let desktop11 = '/assets/images/1/1.jpg';
+    let desktop12 = '/assets/images/1/2.jpg';
+    let desktop13 = '/assets/images/1/3.jpg';
+    let desktop14 = '/assets/images/1/4.jpg';
+    let desktop15 = '/assets/images/1/5.jpg';
+    let desktop16 = '/assets/images/1/6.jpg';
+    let desktop17 = '/assets/images/1/7.jpg';
+    let desktop18 = '/assets/images/1/8.jpg';
 
     import ImgFolder from './components/ImgFolder.svelte';
 
@@ -84,7 +84,7 @@
 </script>
 <main class="content-box">
     
-    {#if currentimg} <div class="image-box"><img alt="image" height="100%" width="100%" src={currentimg} /></div>{/if}
+    {#if currentimg} <div class="image-box"><img alt="currentpic" height="100%" width="100%" src={currentimg} /></div>{/if}
     
     <div class="folder-wrapper">
         <div class="row">
