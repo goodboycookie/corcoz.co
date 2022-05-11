@@ -178,18 +178,21 @@
     
 
     .HomeWrapper{
-      height: 100vh;
+      height: -webkit-fill-available;
     }
 
 }
 
 
 @media screen and (max-width: 500px) {
+  .HomeWrapper{
+      height: -webkit-fill-available;
+    }
   .MainSection{
     padding: 5px;
     margin: 5px;
 
-    min-height: -webkit-fill-available;
+    height: 100%;
 
     border: 3px solid snow;
     display: flex;
