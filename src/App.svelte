@@ -152,7 +152,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    height: 100%;
+    min-height: -webkit-fill-available;
     overflow-y: auto;
   }
   .Content{
@@ -189,12 +189,14 @@
     padding: 5px;
     margin: 5px;
 
+    min-height: -webkit-fill-available;
+
     border: 3px solid snow;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    height: 100%;
+    
     overflow-y: auto;
   }
 
