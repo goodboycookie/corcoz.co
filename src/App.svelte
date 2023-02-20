@@ -14,19 +14,15 @@
 		content = options[val];
     return content;
 	}
-
 </script>
 
-
 	<div class="HomeWrapper">
-		
-		
 		<div class ="MainSection">
 			<!-- <div class ="sidebar">
         <div class="inside-bar">
           {#each options as option}
             <div on:click={()=>{tabClick(option.key)}}>{option.title}</div>
-          {/each}
+          {/each} 
         </div>
       </div> -->
 			<div class="Content">
@@ -44,7 +40,6 @@
   font-family: 'VCR OSD Mono';
   src: local('VCR OSD Mono'), url(./fonts/VCR_OSD_MONO_1.001.ttf);
 }
-
 
 
 .HomeWrapper{
@@ -92,7 +87,6 @@
   overflow: hidden;
 }
 
-
 @keyframes contentAppear {
   0% {opacity: 0;}
   70% {opacity: 0;}
@@ -102,12 +96,6 @@
 .HomeWrapper ::-webkit-scrollbar {
   display: none;
 }
-
-
-
-
-
-
 
 .topbar{
   background-color: #61dafb;

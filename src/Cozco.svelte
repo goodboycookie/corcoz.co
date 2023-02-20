@@ -11,30 +11,93 @@ import Titlebar from './cozco/Titlebar.svelte';
 import { linkWithCredential } from 'firebase/auth';
 
 const chosenColor = "#ffffff";
+
+
+//M TRACKS MOUSE LOCATION WHEN 'CLICKED' IS TRUE
+//PX DETERMINES THE OFFSET FOR ALL OBJECTS ON THE HOMESCREEN
+let m = { x: 0, y: 0 };
+let clicked = false;
+let pX = 0;
+let pY = 0;
+let startpX = pX;
+let startpY = pY;
+let movable = true;
+let screenActivated = false;
+// AUDIO SOURCES
 let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
         "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
-
 let audio;
 let playCount = 0;
+
+
+//UNIQUE BUTTON FUNCTIONS
 const playAudio = (event) => {
     audio = new Audio(srcs[playCount]);
     audio.play();
     audio.loop = false;
     playCount++;
 }
-
 const bigblock = () => {
     window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
 }
+
+//RECEIVES INFO FROM BUTTON CLICKED (INFO WITHIN BUBBLE.SVELTE)
 const receiveMessage = (event) =>{
     if(event.detail.type === 'screen'){
         movable = false;
+        screenActivated = true;
     }
     else if(event.detail.type === 'button'){
         movable = true;
+        screenActivated = false;
     }
 }
-    
+
+
+// SCREEN CLICK AND DRAG FUNCTIONALITY
+const clickDown = () => {
+    m.x = window.event.clientX;
+    m.y = window.event.clientY;
+    startpY = pY;
+    startpX = pX;
+    clicked = true;
+}
+const clickUp = () => {
+    clicked = false;
+    m.x = 0;
+    m.y = 0;
+}
+const handleMousemove = (event) => {
+    if(clicked && movable){
+        pY = startpY + event.clientY - m.y;
+        pX = startpX + event.clientX - m.x;
+    }
+}
+
+// LOGIC FOR MANUAL BUTTONS
+const manualPush = (param) =>{
+    switch(param){
+        case 'left':
+            pX += 250;
+            break;
+        case 'right':
+            pX -= 250;
+            break;
+        case 'up':
+            pY += 250;
+            break;
+        case 'down':
+            pY -= 250;
+            break;
+        default:
+            pX = 0;
+            pY = 0;
+            break;
+    }
+}
+
+
+//JS OBJECTS FOR BUTTON DATA & FUNCTIONS
 export const bubbleData = [
     {
         key: 0,
@@ -70,7 +133,7 @@ export const bubbleData = [
         title: '🖼️',
         activate: true,
         component: Foco,
-        pos: {x: 45, y: -200, wdth: '250px'},
+        pos: {x: 0, y: 0, wdth: '250px'},
         function: receiveMessage,
     },
     {
@@ -78,70 +141,10 @@ export const bubbleData = [
         color: ['#6d326d', 'white'],
         title: '👔🧸',
         activate: false,
-        pos: {x: -110, y: -50, wdth: '80px'},
+        pos: {x: 0, y: 0, wdth: '80px'},
         function: bigblock,
     },
 ]
-
-
-
-    
-
-
-
-
-
-
-
-let m = { x: 0, y: 0 };
-let clicked = false;
-let pX = 0;
-let pY = 0;
-let startpX = pX;
-let startpY = pY;
-let movable = true;
-
-const clickDown = () => {
-    m.x = window.event.clientX;
-    m.y = window.event.clientY;
-    startpY = pY;
-    startpX = pX;
-    clicked = true;
-}
-const clickUp = () => {
-    clicked = false;
-    m.x = 0;
-    m.y = 0;
-}
-const handleMousemove = (event) => {
-    if(clicked && movable){
-        pY = startpY + event.clientY - m.y;
-        pX = startpX + event.clientX - m.x;
-    }
-}
-const manualPush = (param) =>{
-    switch(param){
-        case 'left':
-            pX += 250;
-            break;
-        case 'right':
-            pX -= 250;
-            break;
-        case 'up':
-            pY += 250;
-            break;
-        case 'down':
-            pY -= 250;
-            break;
-        default:
-            pX = 0;
-            pY = 0;
-            break;
-    }
-}
-
-
-    
 
 
 </script>
@@ -149,14 +152,23 @@ const manualPush = (param) =>{
 <main>
     
     <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
+        
+        <!-- TITLE -->
         <!-- <div class={movable ? "translated-div" : "untranslated-div"}> -->
-        <div style="top:{pY+150}px; left:{pX+100}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+        <div style="top:{pY}px; left:{pX}px;" class="floater-text">
+            <Titlebar></Titlebar>
+        </div> 
+
+        <!-- BUTTONS FOR MOBILE SCREENSCROLLING -->
         <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
         <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
         <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
         <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>u</div></div>
-        
+
+        <!-- ALL THE BUBBLES -->
+        <div class="bubble-collection ">
             {#each bubbleData as bubble}
+            <div class= {!movable ? "translated-div" : " untranslated-div"}>
                 <Bubble pX={pX + bubble.pos.x + 'px'} 
                         activatable={bubble.activate}
                         pY={pY + bubble.pos.y + 'px'} 
@@ -170,7 +182,10 @@ const manualPush = (param) =>{
                         <svelte:component this={bubble.component} />
 
                 </Bubble>
+            </div>
             {/each}
+        </div>
+        
             
             <!-- <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
                 <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
@@ -186,98 +201,116 @@ const manualPush = (param) =>{
         width: 100%;
         // transform: translate(50%, 50%);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         position: absolute;
         overflow: hidden;
         cursor: grab;
+        border: 2px dashed orange;
 
-        .translated-div{
-            // height: 100%;
-            // width: 100%;
-            transform: translate(50%, 50%);
-            transition: 0.4s;
-        }
-        .untranslated-div{
-            // height: 100%;
-            // width: 100%;
-            transform: translate(0%, 00%);
-            transition: 0.4s;
-        }
-
-
-        .floater-text{
-            font-family: Roboto Mono;
-            width: 200px;
-            height: 200px;
-            color: blue;
+        .bubble-collection{
             display: flex;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            position: relative;
-            transition: 0.3s;
-            transform: translate(-50%, -50%);
+            // height: 2px;
+            // top: 250px;
+            width: 100%;
+            // border: 4px solid green;
+            transition: 1s;
+
         }
-        .mobile{
-            opacity: 0;
-            display: none;
-        }
-        .button{
-            border-radius: 15px;
-            background-color: #61dafb44;
-            
+    .translated-div{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        // top: 0;
+        // left: 0;
+        // transform: translate(50%, 50%);
+        // transition: 0.4s;
+    }
+    .untranslated-div{
+        // height: 100%;
+        // width: 100%;
+        // transform: translate(0%, 00%);
+        // transition: 0.4s;
+    }
+
+    .floater-text{
+        font-family: Roboto Mono;
+        // width: 200px;
+        // border: 2px solid green;
+        height: 200px;
+        color: blue;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        transition: 0.3s;
+        // top: 100px;
+        // transform: translate(-50%, -50%);
+    }
+    .mobile{
+        opacity: 0;
+        display: none;
+    }
+    .button{
+        border-radius: 15px;
+        background-color: #61dafb44;
+        position: relative;
+        border: 1px solid black;
+        z-index: 1;
+        div{
             position: absolute;
-            border: 1px solid black;
-            z-index: 1;
-            div{
-                position: absolute;
-                display: inline-block;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                
-               
-            }
+            display: inline-block;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             
         }
-        .button-gone{
-            display: none;
-        }
-        .right{
+        
+    }
+    .button-gone{
+        display: none;
+    }
+    .right{
         right: 10px;
         top: 50%;
         width: 3em;
         height: 3em;
-        }
-        .left{
+    }
+    .left{
         left: 10px;
         top: 50%;
         width: 3em;
         height: 3em;
-        } .down{
+    }
+    .down{
         bottom: 10px;
         width: 3em;
         height: 3em;
         transform: translate(-50%, 0);
         left: 50%;
-        }.up{
+    }
+    .up{
         top: 10px;
         transform: translate(-50%, 0);
         left: 50%;
         width: 3em;
         height: 3em;
-        }
-        
-        
-
-        @media screen and (max-width: 900px){
-            .mobile{
-                opacity: 1;
-                display: block;
-            }
-        }
-    
     }
+    
+    
+
+    @media screen and (max-width: 900px){
+        .mobile{
+            opacity: 1;
+            display: block;
+        }
+    }
+    
+}
 
 </style>

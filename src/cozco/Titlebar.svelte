@@ -43,26 +43,28 @@
 
 <style type="text/scss">
 .title-wrapper{
+  // border: 2px solid green;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: Fredoka One;
+  // transform: translate(50%, -50%);
   .big-title{
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    font-family: Fredoka One;
-    flex-direction: row;
+    // text-align: center;
+    // color: white;
+    // font-size: 24px;
+    // flex-direction: row;
     display: flex;
-    align-items: baseline;
-    justify-content: center;
+    // align-items: baseline;
+    // justify-content: center;
 
 
     .title {
-      text-align: center;
+      // text-align: center;
       font-size: 62px;
       display: flex;
-      align-items: center;
+      // align-items: center;
       justify-content: center;
       text-shadow: 3px 3px black;
       cursor: zoom-in;
@@ -78,13 +80,13 @@
     }
   }
   .subtitle{
-    float: left;
-    text-align: center;
-    font-family: Fredoka One;
+    // float: left;
+    // text-align: center;
+    // font-family: Fredoka One;
     font-size: 14px;
     color: snow;
-    -webkit-text-stroke: 1px snow;
-    font-weight: 100;
+    -webkit-text-stroke: 1px black;
+    // font-weight: 100;
   }
 }
 </style>

@@ -77,10 +77,11 @@ import { createEventDispatcher } from "svelte";
         animation-name: enter;
         animation-delay: 0.2s;
         animation-duration: 0.1s;
-        position: absolute;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        border: 1px dashed blue;
 
         .activated-bubble{
             transition: 0.9s;
@@ -97,7 +98,6 @@ import { createEventDispatcher } from "svelte";
                 animation-delay: 0;
                 animation-duration: 1.2s;
                 overflow: auto;
-                
                 .x-button{ 
                     height: 50px;
                     width: 50px;
