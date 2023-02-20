@@ -22,11 +22,11 @@ import { createEventDispatcher } from "svelte";
 
     const dispatch = createEventDispatcher();
 
-    $: stylestring = `background-color: ${bg};  height: ${height}; width: ${height} `;
+    $: stylestring = `background-color: ${bg};  height: ${height}; width: ${height};`;
     $: mainstring = `top: ${activated ? 0 : pY}; 
                     left: ${activated ? 0 : pX}; 
                     height: ${height}; width: ${height};  
-                    transition: ${activated ? '0.5s' : '0.3s' }; ${addedParams}`;
+                    transition: ${activated ? '0.5s' : '0.3s' }; ${addedParams};`;
     
     function toggleActivate(param): any {
         console.log(param);
@@ -152,13 +152,13 @@ import { createEventDispatcher } from "svelte";
         }
     }
     
-    @media screen and (max-width: 900px) {
-        .desktop{
-            display: none;
-            background-color: blue;
-        }
+    // @media screen and (max-width: 900px) {
+    //     .desktop{
+    //         display: none;
+    //         background-color: blue;
+    //     }
     
-    }
+    // }
     
 
 

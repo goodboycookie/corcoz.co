@@ -10,6 +10,18 @@ import App from './App.svelte';
 import Titlebar from './cozco/Titlebar.svelte';
 import { linkWithCredential } from 'firebase/auth';
 
+const chosenColor = "#ffffff";
+let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
+        "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
+
+let audio;
+let playCount = 0;
+const playAudio = (event) => {
+    audio = new Audio(srcs[playCount]);
+    audio.play();
+    audio.loop = false;
+    playCount++;
+}
 
 const bigblock = () => {
     window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
@@ -30,7 +42,7 @@ export const bubbleData = [
         title: '♻️🪵',
         activate: true,
         component: Changelog,
-        pos: {x: 80, y: 80, wdth: '180px'},
+        pos: {x: 0, y: 0, wdth: '180px'},
         function: receiveMessage,
     },
     {
@@ -39,7 +51,7 @@ export const bubbleData = [
         title: '📝',
         activate: true,
         component: Ceevee,
-        pos: {x:-200, y: 100, wdth: '100px'},
+        pos: {x:0, y: 0, wdth: '100px'},
         function: receiveMessage,
     },
     {
@@ -48,7 +60,7 @@ export const bubbleData = [
         title: '📺',
         activate: true,
         component: Teevee,
-        pos: {x: -80, y: 0, wdth: '160px'},
+        pos: {x: 0, y: 0, wdth: '160px'},
         function: receiveMessage,
         param: 'desktop',
     },
@@ -72,69 +84,61 @@ export const bubbleData = [
 ]
 
 
-    const chosenColor = "#ffffff";
+
     
 
 
-    let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
-            "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
-    let audio;
-    let playCount = 0;
-    function playAudio(event) {
-        audio = new Audio(srcs[playCount]);
-        audio.play();
-        audio.loop = false;
-        playCount++;
+
+
+
+
+
+let m = { x: 0, y: 0 };
+let clicked = false;
+let pX = 0;
+let pY = 0;
+let startpX = pX;
+let startpY = pY;
+let movable = true;
+
+const clickDown = () => {
+    m.x = window.event.clientX;
+    m.y = window.event.clientY;
+    startpY = pY;
+    startpX = pX;
+    clicked = true;
+}
+const clickUp = () => {
+    clicked = false;
+    m.x = 0;
+    m.y = 0;
+}
+const handleMousemove = (event) => {
+    if(clicked && movable){
+        pY = startpY + event.clientY - m.y;
+        pX = startpX + event.clientX - m.x;
     }
-
-
-
-
-    let m = { x: 0, y: 0 };
-	let clicked = false;
-	let pX = 0;
-	let pY = 0;
-	let startpX = pX;
-	let startpY = pY;
-    let movable = true;
-    function clickDown() {
-		m.x = window.event.clientX;
-		m.y = window.event.clientY;
-		startpY = pY;
-		startpX = pX;
-	 	clicked = true;
-	}
-    function clickUp() {
-        clicked = false;
-		m.x = 0;
-		m.y = 0;
-	}
-	function handleMousemove(event) {
-		if(clicked && movable){
-            pY = startpY + event.clientY - m.y;
-            pX = startpX + event.clientX - m.x;
-		}
-	}
-    function manualPush(param){
-        switch(param){
-            case 'left':
-                pX += 250;
-                break;
-            case 'right':
-                pX -= 250;
-                break;
-            case 'up':
-                pY += 250;
-                break;
-            case 'down':
-                pY -= 250;
-                break;
-            default:
-                pX = 0;
-                pY = 0;
-                break;
-        }
+}
+const manualPush = (param) =>{
+    switch(param){
+        case 'left':
+            pX += 250;
+            break;
+        case 'right':
+            pX -= 250;
+            break;
+        case 'up':
+            pY += 250;
+            break;
+        case 'down':
+            pY -= 250;
+            break;
+        default:
+            pX = 0;
+            pY = 0;
+            break;
     }
+}
 
 
     
@@ -145,12 +149,13 @@ export const bubbleData = [
 <main>
     
     <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
+        <!-- <div class={movable ? "translated-div" : "untranslated-div"}> -->
         <div style="top:{pY+150}px; left:{pX+100}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
         <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
         <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
         <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
         <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>u</div></div>
-        <div class={movable ? "translated-div" : "untranslated-div"}>
+        
             {#each bubbleData as bubble}
                 <Bubble pX={pX + bubble.pos.x + 'px'} 
                         activatable={bubble.activate}
@@ -161,15 +166,16 @@ export const bubbleData = [
                         textcolor={bubble.color[1]}
                         bg={bubble.color[0]}
                         specialParam={bubble.param}>
-                        
+
                         <svelte:component this={bubble.component} />
+
                 </Bubble>
             {/each}
             
             <!-- <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
                 <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
             </div> -->
-            </div>
+        <!-- </div> -->
         </div>
 
 </main>
@@ -178,22 +184,24 @@ export const bubbleData = [
     .content-box{
         height: 100%;
         width: 100%;
-        
-
+        // transform: translate(50%, 50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
         overflow: hidden;
         cursor: grab;
 
         .translated-div{
-            height: 100%;
-            width: 100%;
+            // height: 100%;
+            // width: 100%;
             transform: translate(50%, 50%);
             transition: 0.4s;
         }
         .untranslated-div{
-            height: 100%;
-            width: 100%;
-            transform: translate(0%, 0%);
+            // height: 100%;
+            // width: 100%;
+            transform: translate(0%, 00%);
             transition: 0.4s;
         }
 
@@ -207,7 +215,7 @@ export const bubbleData = [
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            position: absolute;
+            position: relative;
             transition: 0.3s;
             transform: translate(-50%, -50%);
         }
@@ -269,6 +277,7 @@ export const bubbleData = [
                 display: block;
             }
         }
+    
     }
 
 </style>
