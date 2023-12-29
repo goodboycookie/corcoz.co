@@ -5,15 +5,16 @@ import Changelog from './components/Changelog.svelte';
 import Ceevee from './Ceevee.svelte'
 import Teevee from './Teevee.svelte';
 import Foco from './Foco.svelte';
-import Soundbubble from './cozco/Soundbubble.svelte';
+// import Soundbubble from './cozco/Soundbubble.svelte';
 import App from './App.svelte';
 import Titlebar from './cozco/Titlebar.svelte';
-import { linkWithCredential } from 'firebase/auth';
+// import { linkWithCredential } from 'firebase/auth';
 
 
 const bigblock = () => {
     window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
 }
+
 const receiveMessage = (event) =>{
     if(event.detail.type === 'screen'){
         movable = false;
@@ -145,11 +146,14 @@ export const bubbleData = [
 <main>
     
     <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
-        <div style="top:{pY+150}px; left:{pX+100}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+        <div style="top:{pY+150}px; left:{pX+300}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+        <!-- <div style="top:{pY+400}px; left: {pX+250}px;" class="whats-new">What's new?a   </div> -->
+
         <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
         <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
         <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
         <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>u</div></div>
+        
         <div class={movable ? "translated-div" : "untranslated-div"}>
             {#each bubbleData as bubble}
                 <Bubble pX={pX + bubble.pos.x + 'px'} 
@@ -169,8 +173,9 @@ export const bubbleData = [
             <!-- <div style="top:{pY+50}px; left:{pX-350}px; text-align: center" class="floater-text">u r visitor #
                 <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
             </div> -->
-            </div>
         </div>
+
+    </div>
 
 </main>
 

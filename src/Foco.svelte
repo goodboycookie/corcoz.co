@@ -15,6 +15,19 @@
     let desktop16 = './assets/images/1/6.JPG';
     let desktop17 = './assets/images/1/7.JPG';
     let desktop18 = './assets/images/1/8.JPG';
+    let sneakpeek00 = './assets/images/2/0.png';
+    let sneakpeak01 = './assets/images/2/1.JPG';
+    let sneakpeak02 = './assets/images/2/2.jpg';
+    let sneakpeak03 = './assets/images/2/3.JPG';
+    let sneakpeak04 = './assets/images/2/4.JPG';
+    let sneakpeak05 = './assets/images/2/5.jpg';
+    let sneakpeak06 = './assets/images/2/6.JPG';
+    let sneakpeak07 = './assets/images/2/7.JPG';
+    let sneakpeak08 = './assets/images/2/8.JPG';
+    let sneakpeak09 = './assets/images/2/9.JPG';
+    let sneakpeak10 = './assets/images/2/10.JPG';
+    let sneakpeak11 = './assets/images/2/11.jpg';
+    let sneakpeak12 = './assets/images/2/12.jpg';
 
     import ImgFolder from './components/ImgFolder.svelte';
 
@@ -33,11 +46,18 @@
             desc: 'some select cold cuts from the clutches of a dead cam! proudly shot on a kodak eashyshare.',
             imgs: [desktop10, desktop11, desktop12, desktop13, desktop14, desktop15, desktop16, desktop17, desktop18],
         },
+        {
+            index: 2,
+            title: 'baker dozen sneak peek',
+            id: 'bakerdozen',
+            desc: 'a brief sneak peak at an upcoming project... currently in the oven. 23.12.18',
+            imgs: [sneakpeak01,sneakpeak02,sneakpeak03,sneakpeak04,sneakpeak05,sneakpeak06,sneakpeak07,sneakpeak08, sneakpeak09,sneakpeak10,sneakpeak11, sneakpeak12,],
+        },
 
     ]
     let imglist = [];
     let currentimg;
-    let folderdesc = "choose something already!";
+    let folderdesc = "";
     let imgindex = 0;
     let left = "<--"
     let leftavail = false;
@@ -87,21 +107,22 @@
     {#if currentimg} <div class="image-box"><img alt="currentpic" height="100%" width="100%" src={currentimg} /></div>{/if}
     
     <div class="folder-wrapper">
+        <div class="folders">
+            {#each contentData as folder}
+                <div on:click={()=>swapPics(folder)} class="folder-title">
+                    {folder.title}
+                </div>
+            {/each}
+        </div>
         <div class="row">
             <div on:click={leftClick}  id="left" class="arrow {leftavail ? '' : ' inaccessible'}">{leftavail ? left : "xxx"}</div>
-            <div class="folders">
-                {#each contentData as folder}
-                    <div on:click={()=>swapPics(folder)} class="folder-title">
-                        {folder.title}
-                    </div>
-                {/each}
-            </div>
-        
-        <div on:click={rightClick}  id="right" class="arrow {rightavail ? '' : ' inaccessible'}">{rightavail ? '-->' : "xxx"}</div>
+            <div on:click={rightClick}  id="right" class="arrow {rightavail ? '' : ' inaccessible'}">{rightavail ? '-->' : "xxx"}</div>
         </div>
-        <p class="folder-desc">
-            {folderdesc}
-        </p>
+        <div class="row">
+            <p class="folder-desc">
+                {folderdesc}
+            </p>
+        </div>
     </div>
     
 </main>
@@ -124,9 +145,9 @@
             border: 5px solid snow;
             // min-width: 200px;
             // min-height: 300px;
-            max-width: 65vw;
-            max-height: 65vh;
-            
+            max-width: 60vw;
+            max-height: 75vw;
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -160,28 +181,33 @@
     .folder-wrapper{
 
         position: absolute;
-        bottom: 0;
+        left: 20px;
+        bottom: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+        // justify-content: center;
+        // align-items: center;
+        width: 15vw;
 
         .folder-desc{
-            color: #61dafb;
-            text-align: center;
+            // color: #61dafb;
+            text-align: justify;
+            // border: 1px solid white;
+            // border-radius: 0px 0px 5px 5px;
+            height: 40px;
+            font-size: 0.6em;
+            justify-content: flex-start;
+            padding: 2px;
         }
         .folder-desc:hover{
-            color: snow;
+            // color: snow;
         }
         .row{
             display: flex;
             flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
+            justify-content: space-evenly;
+            // align-items: flex-start;
             border: 1px solid white;
-            border-radius: 5px;
-            height: 35px;
             padding: 3px;
         }
 
@@ -190,10 +216,15 @@
             font-size: 24px;
             font-weight: 700;
             color: snow;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             
         }
         .arrow:hover{
             color: orange;
+            cursor: pointer;
         }
         .inaccessible:hover{
             color: red;
@@ -207,23 +238,32 @@
                 border-right:1px solid white;
             }
         .folders{
-            
+            height: 40px;
             width: auto;
             // padding-right: 5px;
             // height: 100%;
             overflow: scroll;
-            height: 100%;
+            font-size: 0.8em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 80px;
+            border: 1px solid white;
+            // border-radius: 5px 5px 0px 0px;
     }
 
     .folder-title {
         font-family: Roboto Mono;
         color: snow;
-        height: 100%;
+        height: 20px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        padding: 0 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 0px 0 8px;
+        font-size: 0.8em;
     }
     .folder-title:hover{
         color: #ffb941;

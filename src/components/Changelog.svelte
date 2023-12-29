@@ -67,6 +67,12 @@ const changelogData = [
             altdate: "the day some guy caught me in my car sucking chocolate out of a melted lindor truffle",
             message: "i fixed foco a lil and added sum new snaps",
         },
+        {
+            id: 11,
+            date: "28 dec 23",
+            altdate: "the day i forgot to move my car, again.",
+            message: 'Today I made some small changes to a few bits of formatting in foco & changelog. Clearly this page still needs some work.\n\n The contents of this website are not the only things in the world that change. (Duh, I know.) \n\n But why dont I make note of those too?',
+        }
     ]
 
     const enter = (num) =>{
@@ -76,12 +82,15 @@ const changelogData = [
 </script>
 
 <main>
-    {#each [...changelogData].reverse() as data} 
-        <div class="changelog-data">
-            <div on:mouseenter={enter(data.id)} on:mouseleave={enter(data.id)} id="date">{data.id >= 0 ? data.date : data.altdate}</div>
-            <div  id="message">{data.message}</div>
-        </div>
-    {/each}
+    <div class="changelog-container">
+        <h2>changelog</h2>
+        {#each [...changelogData].reverse() as data} 
+            <div class="changelog-data">
+                <div on:mouseenter={enter(data.id)} on:mouseleave={enter(data.id)} id="date">{data.id >= 0 ? data.date : data.altdate}</div>
+                <div  id="message">{data.message}</div>
+            </div>
+        {/each}
+    </div>
 
 </main>
 
@@ -89,26 +98,42 @@ const changelogData = [
 
     main{
         padding: 25px;
+    }
+    .changelog-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        color: #eee;
     }     
     .changelog-data{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    // border: 1px solid brown;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+        margin: 20px 0px;
+        width: 80%;
+
         #date{
-            width: 18%;
-            border-right: 1px solid black;
-            text-align: right;
-            padding-right: 2px
+            font-size: 1.1em;
+            font-style: bold;
+            margin-bottom: 4px;
+            color: #eee;
         }
+
         #message{
-            max-width: 60%;
-            padding-left: 2px;
+            border-radius: 4px;
+            padding: 20px 10px;
             text-align: justify;
-            color: #dddddd;
+            background-color: #eee;
+            color: black;
             text-shadow: 0 0 0 black;
+            font-size: 0.8em;
+            white-space: pre-line;
+            font-family: 'Courier New', Courier, monospace;
         }
-        div:hover{
+
+        #date:hover{
             color: yellow;
         }
 
@@ -130,5 +155,12 @@ const changelogData = [
             
         }
     }
+
+@media screen and (max-width: 500px) {
+.changelog-data{
+    width: 95%;
+}
+
+}
 
 </style>
