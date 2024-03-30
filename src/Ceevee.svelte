@@ -38,7 +38,7 @@
 
         {/if}
         {#if clicked === 1}
-            <!-- <div style={generatePlacement()} class="seeelvi"><a on:click={()=>linkClick()} rel="noreferrer" target ="_blank">here!</a></div> -->
+            <div style={generatePlacement()} class="seeelvi"><a on:click={()=>linkClick()} rel="noreferrer" target ="_blank">here!</a></div>
         {/if}
     
     </div>

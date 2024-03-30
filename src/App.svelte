@@ -18,7 +18,7 @@
 </script>
 
 
-	<div class="HomeWrapper">
+	<main class="HomeWrapper">
 		
 		
 		<div class ="MainSection">
@@ -33,7 +33,7 @@
 				<svelte:component this={content.component} />
 			</div>
 		</div>
-	</div>
+	</main>
 
 
 <style type="text/scss">
@@ -157,7 +157,7 @@
   }
   .Content{
     display: flex;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     position: relative;
     border-radius: 45px 45px 45px 45px;

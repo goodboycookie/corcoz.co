@@ -1,6 +1,8 @@
 <script lang="ts">
+  export let showSubtitle = false;
+
   let channel = 0;
-  let subtitle = "no one will see this mwahaha";
+  let subtitle = "no one will see this lmfaoo";
   let subtitleOpacity = 0;
 
 	function titleHover(val?: number): void {
@@ -37,7 +39,9 @@
             co
         </div>
     </div>
-    <div style="opacity: {subtitleOpacity}" class="subtitle">{subtitle}</div>
+    {#if showSubtitle}
+      <div style="opacity: {subtitleOpacity}" class="subtitle">{subtitle}</div>
+    {/if}
 </div>
 
 
@@ -80,10 +84,10 @@
   .subtitle{
     float: left;
     text-align: center;
-    font-family: Fredoka One;
-    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
     color: snow;
-    -webkit-text-stroke: 1px snow;
+    -webkit-text-stroke: 0.5px black;
     font-weight: 100;
   }
 }

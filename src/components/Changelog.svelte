@@ -1,4 +1,6 @@
 <script>
+import Titlebar from "../cozco/Titlebar.svelte";
+import Mar282024 from "./changelog-components/changelog-20240328.svelte";
 
 const changelogData = [
         {
@@ -72,6 +74,13 @@ const changelogData = [
             date: "28 dec 23",
             altdate: "the day i forgot to move my car, again.",
             message: 'Today I made some small changes to a few bits of formatting in foco & changelog. Clearly this page still needs some work.\n\n The contents of this website are not the only things in the world that change. (Duh, I know.) \n\n But why dont I make note of those too?',
+        },
+        {
+            id:12,
+            date: "28 mar 24",
+            altdate: "the day cris and i received our matching jackets",
+            message: "I will attempt to append something new to this.. .just check it out",
+            component: Mar282024,
         }
     ]
 
@@ -83,11 +92,21 @@ const changelogData = [
 
 <main>
     <div class="changelog-container">
-        <h2>changelog</h2>
+        <div class="header-row">
+            <Titlebar />
+        </div>
         {#each [...changelogData].reverse() as data} 
             <div class="changelog-data">
                 <div on:mouseenter={enter(data.id)} on:mouseleave={enter(data.id)} id="date">{data.id >= 0 ? data.date : data.altdate}</div>
-                <div  id="message">{data.message}</div>
+                <div  id="message">
+                    {#if data.component}
+                        <svelte:component this={data.component} />
+                    {:else}
+                        {data.message}
+                    {/if}
+                    
+                    
+                </div>
             </div>
         {/each}
     </div>

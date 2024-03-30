@@ -5,99 +5,117 @@ import Changelog from './components/Changelog.svelte';
 import Ceevee from './Ceevee.svelte'
 import Teevee from './Teevee.svelte';
 import Foco from './Foco.svelte';
+import About from './About.svelte';
+// import bubbleData from './data/bubbleData';
 // import Soundbubble from './cozco/Soundbubble.svelte';
 import App from './App.svelte';
 import Titlebar from './cozco/Titlebar.svelte';
 // import { linkWithCredential } from 'firebase/auth';
-
+// console.log(bub)
 
 const bigblock = () => {
     window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
 }
 
 const receiveMessage = (event) =>{
+    console.log('message received');
     if(event.detail.type === 'screen'){
         movable = false;
     }
     else if(event.detail.type === 'button'){
         movable = true;
     }
+    else if (event.detail.type === 'question-reveal'){
+        console.log('revealed!');
+    }
 }
-    
+
 export const bubbleData = [
+
     {
         key: 0,
-        color: ['green'],
-        title: '♻️🪵',
-        activate: true,
-        component: Changelog,
-        pos: {x: 80, y: 80, wdth: '180px'},
+        color: ['#fffff0', '#f0f0f0'],
+        title: '📝',
+        component: Ceevee,
+        pos: {x:-200, y: 100, radius: '100px'},
         function: receiveMessage,
     },
     {
         key: 1,
-        color: ['#fffff0', '#f0f0f0'],
-        title: '📝',
-        activate: true,
-        component: Ceevee,
-        pos: {x:-200, y: 100, wdth: '100px'},
+        color: ['#6d326d', 'snow'],
+        title: '📺',
+        component: Teevee,
+        pos: {x: -80, y: 0, radius: '160px'},
         function: receiveMessage,
+        params: ['desktop'],
     },
     {
         key: 2,
-        color: ['#6d326d', 'snow'],
-        title: '📺',
-        activate: true,
-        component: Teevee,
-        pos: {x: -80, y: 0, wdth: '160px'},
+        color: ['#61dafb', 'white'],
+        title: '🖼️',
+        component: Foco,
+        pos: {x: 45, y: -200, radius: '250px'},
         function: receiveMessage,
-        param: 'desktop',
     },
     {
         key: 3,
-        color: ['#61dafb', 'white'],
-        title: '🖼️',
-        activate: true,
-        component: Foco,
-        pos: {x: 45, y: -200, wdth: '250px'},
-        function: receiveMessage,
+        color: ['#6d326d', 'white'],
+        title: '👔🧸',
+        pos: {x: -110, y: -50, radius: '80px'},
+        function: bigblock,
+        params: ['noactivate'],
     },
     {
         key: 4,
-        color: ['#6d326d', 'white'],
-        title: '👔🧸',
-        activate: false,
-        pos: {x: -110, y: -50, wdth: '80px'},
-        function: bigblock,
+        color: ['black'],
+        title: '❔',
+        component: About,
+        pos: {x: -10, y: 175, radius: "75px"},
+        function: receiveMessage,
+        activatedScreenSize: '50%',
+    },
+    {
+        key: 5,
+        color: ['green'],
+        title: '♻️🪵',
+        component: Changelog,
+        pos: {x: 80, y: 80, radius: "180px"},
+        function: receiveMessage,
+        params: ['startbubble'],
+        starterbubble: true,
     },
 ]
 
 
-    const chosenColor = "#ffffff";
+const pageBackgroundColor = "#ffffff";
     
 
 
-    let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
-            "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
-    let audio;
-    let playCount = 0;
-    function playAudio(event) {
-        audio = new Audio(srcs[playCount]);
-        audio.play();
-        audio.loop = false;
-        playCount++;
-    }
+
+    /////ONE DAY I WILL ADD SOME SOUND/MUSIC SHIT... ONE DAY...
+    /////
+    // let srcs = ["http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3", 
+    //         "http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg"];
+    // let audio;
+    // let playCount = 0;
+    // function playAudio(event) {
+    //     audio = new Audio(srcs[playCount]);
+    //     audio.play();
+    //     audio.loop = false;
+    //     playCount++;
+    // }
 
 
 
-
+// MOVEMENT RELATED SHIT
     let m = { x: 0, y: 0 };
-	let clicked = false;
+	let clicked = true;
 	let pX = 0;
 	let pY = 0;
 	let startpX = pX;
 	let startpY = pY;
-    let movable = true;
+    let movable = false;
+
     function clickDown() {
 		m.x = window.event.clientX;
 		m.y = window.event.clientY;
@@ -110,12 +128,16 @@ export const bubbleData = [
 		m.x = 0;
 		m.y = 0;
 	}
+
 	function handleMousemove(event) {
 		if(clicked && movable){
             pY = startpY + event.clientY - m.y;
             pX = startpX + event.clientX - m.x;
 		}
 	}
+    //TODO: CHANGE THE MOBILE MOVEMENT LETTERS TO ICONS.
+    //      THAT'S NOT IN THIS PART OF THE CODE, BUT 
+    //      DO IT ANYWAY
     function manualPush(param){
         switch(param){
             case 'left':
@@ -145,26 +167,35 @@ export const bubbleData = [
 
 <main>
     
-    <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {chosenColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
-        <div style="top:{pY+150}px; left:{pX+300}px; text-align: center" class="floater-text"><Titlebar></Titlebar></div> 
+    <div class="content-box" on:mousedown={clickDown} on:mouseup={clickUp} on:mousemove={handleMousemove} style="background-color: {pageBackgroundColor}; cursor: {clicked ? 'grabbing' : 'grab'}">
+         
         <!-- <div style="top:{pY+400}px; left: {pX+250}px;" class="whats-new">What's new?a   </div> -->
-
-        <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>r</div></div>
-        <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>l</div></div>
-        <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>d</div></div>
-        <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>u</div></div>
+        
+        <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>🢂</div></div>
+        <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>🢀</div></div>
+        <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>🢃</div></div>
+        <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>🢁</div></div>
         
         <div class={movable ? "translated-div" : "untranslated-div"}>
+            <!-- TODO: ADD MORE SILLY STUFF LIKE THIS. ONLY PUBLISH IT WHEN THERE'S ENOUGH IN ALL DIRECTIONS.break.break. -->
+            <!--       AND PUT IN SEPARATE COMPONENT. OBVIOUSLY.break.break.break. -->
+            <!-- <div style="top:{pY-150}px; left:{pX-1550}px; text-align: center; width: 150px; height: 225px; border: 2px dashed blue" class="floater-text">
+                your ad here!    $500
+            </div> -->
+            <div style="top:{pY-225}px; left:{pX-50}px; text-align: center; width: 225px; height: 150px;" class="floater-text mobile">
+                i'm so sorry -- this website is much better on desktop..
+            </div>
+            <div style="top:{pY-100}px; left:{pX-200}px; text-align: center" class="floater-text"><Titlebar showSubtitle={true}></Titlebar></div>
             {#each bubbleData as bubble}
                 <Bubble pX={pX + bubble.pos.x + 'px'} 
-                        activatable={bubble.activate}
                         pY={pY + bubble.pos.y + 'px'} 
                         title={bubble.title} 
-                        height={bubble.pos.wdth}
+                        bubbleRadius={bubble.pos.radius}
                         on:message={bubble.function}
                         textcolor={bubble.color[1]}
                         bg={bubble.color[0]}
-                        specialParam={bubble.param}>
+                        specialParams={bubble.params}
+                        activatedScreenSize={bubble.activatedScreenSize}>
                         
                         <svelte:component this={bubble.component} />
                 </Bubble>
@@ -174,6 +205,7 @@ export const bubbleData = [
                 <img src="https://hitwebcounter.com/counter/counter.php?page=7926699&style=0014&nbdigits=5&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
             </div> -->
         </div>
+        
 
     </div>
 

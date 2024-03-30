@@ -1,66 +1,90 @@
 <script lang="ts">
-import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from "svelte";
+    import { bubble } from "svelte/internal";
 
-    let activated = false;
-
-    export let specialParam;
+    export let activated = false;
+    export let specialParams = [];
     export let title;
-    export let activatable = false;
-    export let height = '125px';
+    export let bubbleRadius;
     export let textcolor = 'snow';
-    export let width = height;
-    export let bg = 'blue';
+    export let bg;
     export let pX;
     export let pY;
+    export let activatedScreenSize = '100%';
 
-    let addedParams = " ";
-    if(specialParam !== undefined){
-    
-        addedParams = addedParams + specialParam;
+    // let addedParams = " ";
+    let width = bubbleRadius;
+    let activatable = true;
 
-    }
+    //STARTER PARAM SEARCH
+    specialParams.forEach((item) => {
+        switch(item){
+            case 'noactivate':
+                activatable = false;
+                break;
+            case 'startbubble':
+                activated = true;
+                bubbleRadius = '100%';
+                break;
+        }
+
+     })
+
 
     const dispatch = createEventDispatcher();
 
-    $: stylestring = `background-color: ${bg};  height: ${height}; width: ${height} `;
+    $: stylestring = `background-color: ${bg};  height: ${bubbleRadius}; width: ${bubbleRadius} `;
     $: mainstring = `top: ${activated ? 0 : pY}; 
                     left: ${activated ? 0 : pX}; 
-                    height: ${height}; width: ${height};  
-                    transition: ${activated ? '0.5s' : '0.3s' }; ${addedParams}`;
-    
-    function toggleActivate(param): any {
-        console.log(param);
-        dispatch("message", {type: param});
-        if(activatable){
-            if (param === 'screen'){
-                activated = true;
-                height = "100%";
-            }
-            if (param === 'button'){
-                activated = false;
-                height = width;
-            }
+                    height: ${bubbleRadius}; 
+                    width: ${bubbleRadius};  
+                    transition: ${activated ? '0.5s' : '0.3s' }`;
+
+
+    function closeScreen(): any {
+        dispatch("message", {type: 'button'});
+        if (activatable && activated) {
+            activated = false;
+            bubbleRadius = width;
         }
     }
 
+    function openScreen(amount): any {
+        dispatch("message", {type: 'screen'});
+        if(activatable && !activated){
+            activated = true;
+            bubbleRadius = amount;
+        }
+    }
+
+    // function activate(): any {
+    //     specialParams.forEach((item) => {
+
+    //     })
+    // }
 
 
 
 </script>
  
-<main class={"bub " + addedParams} style={mainstring}>
+<main class="bub" style={mainstring}>
     <div style={stylestring}  class={activated ? "activated-bubble" : "deactivated-bubble"}>
-        {#if activated}
+        <!-- {#if activated} -->
             <div class="bubble-contents">
-                <div on:click={()=>{toggleActivate('button')}} class="x-button">X</div>
-                <slot>
-                </slot>
+                {#if activated}
+                    <div on:click={()=>{closeScreen()}} class="x-button">X</div>
+                    <slot />
+                {:else}
+                    <div on:click={()=>{openScreen(activatedScreenSize)}} class="deactivated-bubble">
+                        <div style="color:{textcolor}">{title}</div>
+                    </div>
+                {/if}
             </div>
-        {:else}
+        <!-- {:else}
             <div on:click={()=>{toggleActivate('screen')}} class="bubble-contents">
-                <div style="color:{textcolor};">{title}</div>
+                
             </div>
-        {/if}
+        {/if} -->
     </div>
 </main>
 
@@ -97,7 +121,6 @@ import { createEventDispatcher } from "svelte";
                 animation-delay: 0;
                 animation-duration: 1.2s;
                 overflow: auto;
-                
                 .x-button{ 
                     height: 50px;
                     width: 50px;
@@ -126,6 +149,8 @@ import { createEventDispatcher } from "svelte";
             align-items: center;
             border-radius: 50%;
             transition: 0.5s;
+            height: 100%;
+            width: 100%;
             .bubble-contents{
                 height: 100%; 
                 width: 100%; 
@@ -156,6 +181,9 @@ import { createEventDispatcher } from "svelte";
         .desktop{
             display: none;
             background-color: blue;
+        }
+        .deactivated-bubble{
+            font-size: 24px;
         }
     
     }

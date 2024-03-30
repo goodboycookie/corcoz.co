@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
 // import App from "./App.svelte";
     let focogrid = './assets/focogrid.svg';
     let desktop00 = './assets/images/0/0.JPG';
@@ -15,19 +17,19 @@
     let desktop16 = './assets/images/1/6.JPG';
     let desktop17 = './assets/images/1/7.JPG';
     let desktop18 = './assets/images/1/8.JPG';
-    let sneakpeek00 = './assets/images/2/0.png';
-    let sneakpeak01 = './assets/images/2/1.JPG';
-    let sneakpeak02 = './assets/images/2/2.jpg';
-    let sneakpeak03 = './assets/images/2/3.JPG';
-    let sneakpeak04 = './assets/images/2/4.JPG';
-    let sneakpeak05 = './assets/images/2/5.jpg';
-    let sneakpeak06 = './assets/images/2/6.JPG';
-    let sneakpeak07 = './assets/images/2/7.JPG';
-    let sneakpeak08 = './assets/images/2/8.JPG';
-    let sneakpeak09 = './assets/images/2/9.JPG';
-    let sneakpeak10 = './assets/images/2/10.JPG';
-    let sneakpeak11 = './assets/images/2/11.jpg';
-    let sneakpeak12 = './assets/images/2/12.jpg';
+    let sneakpeek00 = './assets/images/2/0.webp';
+    let sneakpeak01 = './assets/images/2/1.webp';
+    let sneakpeak02 = './assets/images/2/2.webp';
+    let sneakpeak03 = './assets/images/2/3.webp';
+    let sneakpeak04 = './assets/images/2/4.webp';
+    let sneakpeak05 = './assets/images/2/5.webp';
+    let sneakpeak06 = './assets/images/2/6.webp';
+    let sneakpeak07 = './assets/images/2/7.webp';
+    let sneakpeak08 = './assets/images/2/8.webp';
+    let sneakpeak09 = './assets/images/2/9.webp';
+    let sneakpeak10 = './assets/images/2/10.webp';
+    let sneakpeak11 = './assets/images/2/11.webp';
+    let sneakpeak12 = './assets/images/2/12.webp';
 
     import ImgFolder from './components/ImgFolder.svelte';
 
@@ -36,22 +38,22 @@
             index: 0,
             title: 'cutting floor flashbacks',
             id: 'yahoo',
-            desc: 'a couple cutting-floor flashbacks to 2019 or 20.. i cant remember. shot on broken olympus slr lol',
+            desc: 'forgotten pics from the past.. 2019, or 20',
             imgs: [desktop00, desktop01, desktop02, desktop03, desktop04],
         },
         {
             index: 1,
             title: 'greencam cold cuts',
             id: 'kodakgreencam',
-            desc: 'some select cold cuts from the clutches of a dead cam! proudly shot on a kodak eashyshare.',
+            desc: 'some cold cuts, selected from the clutches of a dead cam! proudly shot on a kodak eashyshare.',
             imgs: [desktop10, desktop11, desktop12, desktop13, desktop14, desktop15, desktop16, desktop17, desktop18],
         },
         {
             index: 2,
             title: 'baker dozen sneak peek',
             id: 'bakerdozen',
-            desc: 'a brief sneak peak at an upcoming project... currently in the oven. 23.12.18',
-            imgs: [sneakpeak01,sneakpeak02,sneakpeak03,sneakpeak04,sneakpeak05,sneakpeak06,sneakpeak07,sneakpeak08, sneakpeak09,sneakpeak10,sneakpeak11, sneakpeak12,],
+            desc: 'a sneak peak at a slow burn project currently in the oven',
+            imgs: [sneakpeek00, sneakpeak01,sneakpeak02,sneakpeak03,sneakpeak04,sneakpeak05,sneakpeak06,sneakpeak07,sneakpeak08, sneakpeak09,sneakpeak10,sneakpeak11, sneakpeak12,],
         },
 
     ]
@@ -62,6 +64,8 @@
     let left = "<--"
     let leftavail = false;
     let rightavail = false;
+    let curr_folderindex = 2;
+
 
     const checkArrows = () =>{
         if(imgindex+1 < imglist.length){
@@ -79,6 +83,7 @@
     }
 
     function swapPics(folder) {
+        curr_folderindex = folder.index;
         imglist = folder.imgs;
         imgindex=0;
         folderdesc = folder.desc;
@@ -100,7 +105,9 @@
         checkArrows();
         }
     }
-
+    onMount(() => {
+        setTimeout(() => {swapPics(contentData[curr_folderindex]);}, 750 )   
+        });
 </script>
 <main class="content-box">
     
@@ -109,7 +116,7 @@
     <div class="folder-wrapper">
         <div class="folders">
             {#each contentData as folder}
-                <div on:click={()=>swapPics(folder)} class="folder-title">
+                <div on:click={()=>swapPics(folder)} class="folder-title {folder.index == curr_folderindex ? 'chosentitle' : ''}">
                     {folder.title}
                 </div>
             {/each}
@@ -194,7 +201,7 @@
             text-align: justify;
             // border: 1px solid white;
             // border-radius: 0px 0px 5px 5px;
-            height: 40px;
+            height: 50px;
             font-size: 0.6em;
             justify-content: flex-start;
             padding: 2px;
@@ -238,7 +245,7 @@
                 border-right:1px solid white;
             }
         .folders{
-            height: 40px;
+            
             width: auto;
             // padding-right: 5px;
             // height: 100%;
@@ -247,16 +254,16 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            height: 80px;
             border: 1px solid white;
             // border-radius: 5px 5px 0px 0px;
+            height: 100px;
     }
 
     .folder-title {
         font-family: Roboto Mono;
-        color: snow;
         height: 20px;
         display: flex;
+        color: snow;
         flex-direction: row;
         align-items: center;
         justify-content: center;
@@ -264,6 +271,9 @@
         overflow: hidden;
         padding: 0 0px 0 8px;
         font-size: 0.8em;
+    }
+    .chosentitle{
+        color: #ffc546
     }
     .folder-title:hover{
         color: #ffb941;
