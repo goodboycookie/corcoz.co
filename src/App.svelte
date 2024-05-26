@@ -151,7 +151,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    min-height: -webkit-fill-available;
+    height: calc(100%);
     overflow-y: auto;
   }
   .Content{
@@ -185,7 +185,7 @@
 
 @media screen and (max-width: 500px) {
   .HomeWrapper{
-      height: 100vh;
+      height: calc(100%);
     }
   .MainSection{
     padding: 5px;

@@ -281,4 +281,33 @@
         cursor: zoom-in;
     }
     }
+
+    @media screen and (max-width: 900px){
+        .content-box{
+            .image-box{
+                border: 5px solid snow;
+                // min-width: 200px;
+                // min-height: 300px;
+                max-width: 90vw;
+                max-height: 150vw;
+                margin-top: 55px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                margin-bottom: 60px;
+                img{
+                    object-fit: contain;
+                }
+            }
+        }
+        .folder-wrapper{
+            position: relative;
+            display: flex;
+            width: 300px;
+            bottom: 20px;
+            left: 0;
+            align-self: center;
+        }
+    }
 </style>
