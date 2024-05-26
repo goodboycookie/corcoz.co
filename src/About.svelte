@@ -3,11 +3,12 @@
 
 let optionslist=[
     "this site was handcoded with love <3 (with svelte)",
-    "my fave song rn is good good things, the drain cover",
-    "i have a cold right now",
-    "hawthorne forever... i guess"
+    "i'm nearly over the cold i have right now",
+    "hawthorne forever... i guess",
+    "this site was handcoded with love <3 (with svelte)",
+    "if u, like, neeeed to hmu... axel@corcoz.co" 
+];
 
-]
 let renderedText = optionslist[Math.floor(Math.random() * optionslist.length)];
 // let renderedText = "what the flipp";
 
