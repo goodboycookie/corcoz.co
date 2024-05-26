@@ -185,7 +185,86 @@
         .deactivated-bubble{
             font-size: 24px;
         }
-    
+        .bub{
+        opacity: 1;
+        animation-name: enter;
+        animation-delay: 0.2s;
+        animation-duration: 0.1s;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .activated-bubble{
+            transition: 0.9s;
+            border-radius: 0;
+            position: absolute;
+            font-size: 20px;
+            z-index: 15;
+            cursor: default;
+            border-radius: 25px;
+            overflow: auto;
+            .bubble-contents{
+                opacity: 1;
+                animation-name: enter;
+                animation-delay: 0;
+                animation-duration: 1.2s;
+                overflow: auto;
+                .x-button{ 
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    background-color: rgba(255, 0, 0, 0.3);
+                    position: absolute;
+                    border: 1px solid #030303;
+                    top: 15px;
+                    left: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    z-index: 18;
+                    transition: 0.1s;
+                }
+                .x-button:hover{
+                    background-color: rgba(255, 0, 0, 1);
+                }
+            }
+        }
+        .deactivated-bubble{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: 0.5s;
+            height: 100%;
+            width: 100%;
+            .bubble-contents{
+                height: 100%; 
+                width: 100%; 
+                border-radius: 50%; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center;
+                // font-size: 1.3em;
+                // border: 1px solid fuchsia;
+                font-weight: 400;
+                overflow:hidden;
+                font-family: Fredoka One;
+                transition: 0.2s;
+                font-size: 1.5vw;
+                
+            }
+            
+            
+        }
+        .deactivated-bubble:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+            
+        }
+    }
     }
     
 

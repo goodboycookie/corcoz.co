@@ -295,7 +295,7 @@
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
-                margin-bottom: 60px;
+                margin-bottom: 30px;
                 img{
                     object-fit: contain;
                 }
@@ -303,11 +303,98 @@
         }
         .folder-wrapper{
             position: relative;
+            left: 0px;
+            bottom: 10px;
             display: flex;
-            width: 300px;
-            bottom: 20px;
-            left: 0;
-            align-self: center;
-        }
+            flex-direction: column;
+            // justify-content: center;
+            // align-items: center;
+            width: 350px;
+
+            .folder-desc{
+                // color: #61dafb;
+                text-align: justify;
+                // border: 1px solid white;
+                // border-radius: 0px 0px 5px 5px;
+                height: 40px;
+                font-size: 0.6em;
+                justify-content: flex-start;
+                padding: 2px;
+            }
+            .folder-desc:hover{
+                // color: snow;
+            }
+            .row{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                // align-items: flex-start;
+                border: 1px solid white;
+                padding: 3px;
+            }
+
+            .arrow{
+                font-family: Roboto Mono;
+                font-size: 24px;
+                font-weight: 700;
+                color: snow;
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
+            .arrow:hover{
+                color: orange;
+                cursor: pointer;
+            }
+            .inaccessible:hover{
+                color: red;
+            }
+                #right{
+
+                    border-left:1px solid white;
+                }
+                #left{
+
+                    border-right:1px solid white;
+                }
+            .folders{
+                
+                width: auto;
+                // padding-right: 5px;
+                // height: 100%;
+                overflow: scroll;
+                font-size: 0.8em;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                border: 1px solid white;
+                // border-radius: 5px 5px 0px 0px;
+                height: 50px;
+            }
+
+            .folder-title {
+            font-family: Roboto Mono;
+            height: 20px;
+            display: flex;
+            color: snow;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 0 0px 0 8px;
+            font-size: 0.8em;
+            }
+            .chosentitle{
+            color: #ffc546
+            }
+            .folder-title:hover{
+            color: #ffb941;
+            text-shadow: snow;
+            cursor: zoom-in;
+            }
+            }
     }
 </style>
