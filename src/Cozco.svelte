@@ -181,10 +181,10 @@ const pageBackgroundColor = "#ffffff";
          
         <!-- <div style="top:{pY+400}px; left: {pX+250}px;" class="whats-new">What's new?a   </div> -->
         
-        <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>🢂</div></div>
-        <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>🢀</div></div>
-        <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>🢃</div></div>
-        <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>🢁</div></div>
+        <div on:click={()=>{manualPush('right')}} class={movable ? "mobile button right" : "button-gone"}><div>➡️</div></div>
+        <div on:click={()=>{manualPush('left')}} class={movable ? "mobile button left" : "button-gone"}><div>⬅️</div></div>
+        <div on:click={()=>{manualPush('down')}} class={movable ? "mobile button down" : "button-gone"}><div>⬇️</div></div>
+        <div on:click={()=>{manualPush('up')}} class={movable ? "mobile button up" : "button-gone"}><div>⬆️</div></div>
         
         <div class={movable ? "translated-div" : "untranslated-div"}>
             <!-- TODO: ADD MORE SILLY STUFF LIKE THIS. ONLY PUBLISH IT WHEN THERE'S ENOUGH IN ALL DIRECTIONS.break.break. -->
@@ -267,11 +267,11 @@ const pageBackgroundColor = "#ffffff";
             display: none;
         }
         .button{
-            border-radius: 15px;
-            background-color: #61dafb44;
+            // border-radius: 15px;
+            // background-color: #61dafb44;
             
             position: absolute;
-            border: 1px solid black;
+            // border: 1px solid black;
             z-index: 1;
             div{
                 position: absolute;
@@ -279,6 +279,7 @@ const pageBackgroundColor = "#ffffff";
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                font-size: 32px;
                 
                
             }

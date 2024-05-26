@@ -143,7 +143,8 @@
 
 @media screen and (max-width: 900px) {
   .MainSection{
-    // padding: 10px;
+    padding: 0px;
+    border: none;
     // margin: 5px;
     background-color: black;
     display: flex;
@@ -158,7 +159,7 @@
     height: 100vh;
     width: 100%;
     position: relative;
-    border-radius: 45px 45px 45px 45px;
+    border-radius: 35px 35px 35px 35px;
     overflow: hidden;
   }
   // .sidebar{
@@ -184,7 +185,7 @@
 
 @media screen and (max-width: 500px) {
   .HomeWrapper{
-      height: -webkit-fill-available;
+      height: 100vh;
     }
   .MainSection{
     padding: 5px;
