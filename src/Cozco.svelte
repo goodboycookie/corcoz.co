@@ -13,6 +13,16 @@ import Titlebar from './cozco/Titlebar.svelte';
 // import { linkWithCredential } from 'firebase/auth';
 // console.log(bub)
 
+const sendAlert = () => {
+
+    let optionslist=[
+    "this site was handcoded with love <3 (with svelte)",
+    "my fave song rn is good good things, the drain cover",
+    "i have a cold right now",
+    "hawthorne forever... i guess"
+    ]
+    alert(optionslist[Math.floor(Math.random() * optionslist.length)]);
+}
 const bigblock = () => {
     window.open("https://goodboycookie.github.io/bigblocksoffice/", "_blank");
 }
@@ -71,7 +81,8 @@ export const bubbleData = [
         title: '❔',
         component: About,
         pos: {x: -10, y: 175, radius: "75px"},
-        function: receiveMessage,
+        function: sendAlert,
+        params: ['noactivate'],
         activatedScreenSize: '50%',
     },
     {
@@ -81,7 +92,6 @@ export const bubbleData = [
         component: Changelog,
         pos: {x: 80, y: 80, radius: "180px"},
         function: receiveMessage,
-        params: ['startbubble'],
         starterbubble: true,
     },
 ]
@@ -109,12 +119,12 @@ const pageBackgroundColor = "#ffffff";
 
 // MOVEMENT RELATED SHIT
     let m = { x: 0, y: 0 };
-	let clicked = true;
+	let clicked = false;
 	let pX = 0;
 	let pY = 0;
 	let startpX = pX;
 	let startpY = pY;
-    let movable = false;
+    let movable = true;
 
     function clickDown() {
 		m.x = window.event.clientX;
@@ -186,12 +196,16 @@ const pageBackgroundColor = "#ffffff";
                 i'm so sorry -- this website is much better on desktop..
             </div>
             <div style="top:{pY-100}px; left:{pX-200}px; text-align: center" class="floater-text"><Titlebar showSubtitle={true}></Titlebar></div>
+            <!-- <div style="top:{pY-40}px; left:{pX-225}px; text-align: center; width: 225px; height: 150px;" class="floater-text">
+                welcome to my website!
+            </div> -->
+
             {#each bubbleData as bubble}
                 <Bubble pX={pX + bubble.pos.x + 'px'} 
                         pY={pY + bubble.pos.y + 'px'} 
                         title={bubble.title} 
                         bubbleRadius={bubble.pos.radius}
-                        on:message={bubble.function}
+                        on:message={bubble.function} 
                         textcolor={bubble.color[1]}
                         bg={bubble.color[0]}
                         specialParams={bubble.params}

@@ -19,8 +19,6 @@
 
 
 	<main class="HomeWrapper">
-		
-		
 		<div class ="MainSection">
 			<!-- <div class ="sidebar">
         <div class="inside-bar">
@@ -109,45 +107,45 @@
 
 
 
-.topbar{
-  background-color: #61dafb;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+// .topbar{
+//   background-color: #61dafb;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
 
 
-.inside-bar{
-    display: flex;
-    height: 100%;
-    /* overflow: auto; */
-    width: 20vw;
-    font-size: 3em;
-    flex-direction: column;
-    border-radius: 30px 30px 30px 30px;
-    text-align: right;
-  }
+// .inside-bar{
+//     display: flex;
+//     height: 100%;
+//     /* overflow: auto; */
+//     width: 20vw;
+//     font-size: 3em;
+//     flex-direction: column;
+//     border-radius: 30px 30px 30px 30px;
+//     text-align: right;
+//   }
 
-.inside-bar > div {
-    font-family: Arial Black;
-    font-style: italic;
-    margin: 0px 20px;
-    color: black;
-    transition: 0.3s;
-}
+// .inside-bar > div {
+//     font-family: Arial Black;
+//     font-style: italic;
+//     margin: 0px 20px;
+//     color: black;
+//     transition: 0.3s;
+// }
 
-.inside-bar>div:hover{
-    color: white;
-    cursor: pointer;
-}
+// .inside-bar>div:hover{
+//     color: white;
+//     cursor: pointer;
+// }
 
 
 @media screen and (max-width: 900px) {
   .MainSection{
-    padding: 10px;
-    margin: 5px;
-
+    // padding: 10px;
+    // margin: 5px;
+    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -163,22 +161,22 @@
     border-radius: 45px 45px 45px 45px;
     overflow: hidden;
   }
-  .sidebar{
-    display: flex;
-    flex-direction: row;
-    font-family: Arial Black;
-    width: 100%;
-    height:15%;
-    overflow-y: auto;
-    .inside-bar{
-      display: flex;
-    flex-direction: row;
-    }
-  }
+  // .sidebar{
+  //   display: flex;
+  //   flex-direction: row;
+  //   font-family: Arial White;
+  //   width: 100%;
+  //   height:15%;
+  //   overflow-y: auto;
+  //   .inside-bar{
+  //     display: flex;
+  //   flex-direction: row;
+  //   }
+  // }
     
 
     .HomeWrapper{
-      height: -webkit-fill-available;
+      height: 100vh;
     }
 
 }
@@ -194,11 +192,10 @@
 
     height: 100%;
 
-    border: 3px solid snow;
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     
     overflow-y: auto;
   }
